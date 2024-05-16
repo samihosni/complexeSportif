@@ -14,7 +14,7 @@ import java.util.Date;
 @Setter
 public class Reservation {
     @Id
-    private Integer id;
+    private Long id;
     private String description;
     private Date dateRes;
 

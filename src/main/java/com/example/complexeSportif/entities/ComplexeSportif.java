@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class ComplexeSportif {
     @Id
-    private Integer id;
+    private Long id;
     private String name;
     private String adress;
     private Integer phone;

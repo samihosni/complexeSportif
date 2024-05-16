@@ -14,7 +14,7 @@ import java.util.Date;
 @Setter
 public class Courses {
     @Id
-    private Integer id;
+    private Long id;
     private String name;
     private Date dateCourse;
     private double duration;
