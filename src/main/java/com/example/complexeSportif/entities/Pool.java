@@ -2,6 +2,8 @@ package com.example.complexeSportif.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,4 +18,8 @@ public class Pool {
     private String type;
     private double temp;
     private Boolean capacity;
+    // Relations
+    @OneToOne
+    @JoinColumn(name = "complexe_sportif_id")
+    private ComplexeSportif complexeSportif;
 }
