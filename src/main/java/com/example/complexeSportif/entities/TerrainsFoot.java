@@ -2,14 +2,13 @@ package com.example.complexeSportif.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Data
-@Getter
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class TerrainsFoot {
     @Id
     private Integer id;
