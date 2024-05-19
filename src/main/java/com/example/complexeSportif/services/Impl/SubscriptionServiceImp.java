@@ -1,9 +1,10 @@
-package com.example.complexeSportif.services;
+package com.example.complexeSportif.services.Impl;
 
 import com.example.complexeSportif.entities.SalleMuscu;
 import com.example.complexeSportif.entities.Subscriptions;
 import com.example.complexeSportif.repositories.SalleMuscuRepo;
 import com.example.complexeSportif.repositories.SubscriptionRepo;
+import com.example.complexeSportif.services.SubscriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,8 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class SubscriptionServiceImp implements SubscriptionService {
-    @Autowired
-    private SubscriptionRepo subscriptionRepo;
+
+    private final SubscriptionRepo subscriptionRepo;
     @Override
     public List<Subscriptions> getAllSubscriptions() {
         return subscriptionRepo.findAll();

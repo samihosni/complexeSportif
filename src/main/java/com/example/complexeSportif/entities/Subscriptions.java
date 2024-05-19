@@ -1,5 +1,7 @@
 package com.example.complexeSportif.entities;
 
+import com.example.complexeSportif.entities.Enum.PaymentType;
+import com.example.complexeSportif.entities.Enum.SubscriptionType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Data;

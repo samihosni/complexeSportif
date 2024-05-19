@@ -2,6 +2,7 @@ package com.example.complexeSportif.models;
 
 import com.example.complexeSportif.entities.ComplexeSportif;
 import com.example.complexeSportif.services.ComplexeSportifService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +13,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/complexe-sportif")
+@RequiredArgsConstructor
 public class ComplexSportifREST {
-    @Autowired
-    private ComplexeSportifService complexeSportifService;
+
+    private final ComplexeSportifService complexeSportifService;
 
     @GetMapping
     public ResponseEntity<List<ComplexeSportif>> getAllComplexeSportifs() {

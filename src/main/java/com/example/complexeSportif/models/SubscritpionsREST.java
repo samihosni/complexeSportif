@@ -3,6 +3,7 @@ package com.example.complexeSportif.models;
 
 import com.example.complexeSportif.entities.Subscriptions;
 import com.example.complexeSportif.services.SubscriptionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +14,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/subscriptions")
+@RequiredArgsConstructor
 public class SubscritpionsREST {
-    @Autowired
-    private SubscriptionService subscriptionService;
+
+    private final SubscriptionService subscriptionService;
     @GetMapping("/all")
     public ResponseEntity<List<Subscriptions>> getAllSubscriptions() {
         List<Subscriptions> subscriptions = subscriptionService.getAllSubscriptions();

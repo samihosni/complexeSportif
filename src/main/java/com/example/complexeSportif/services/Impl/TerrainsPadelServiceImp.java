@@ -1,7 +1,8 @@
-package com.example.complexeSportif.services;
+package com.example.complexeSportif.services.Impl;
 
 import com.example.complexeSportif.entities.TerrainsPadel;
 import com.example.complexeSportif.repositories.TerrainsPadelRepo;
+import com.example.complexeSportif.services.TerrainsPadelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +13,8 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class TerrainsPadelServiceImp implements TerrainsPadelService {
-    @Autowired
-    private TerrainsPadelRepo terrainsPadelRepo;
+
+    private final TerrainsPadelRepo terrainsPadelRepo;
     @Override
     public List<TerrainsPadel> getAllTerrainsPadel() {
         return terrainsPadelRepo.findAll();
