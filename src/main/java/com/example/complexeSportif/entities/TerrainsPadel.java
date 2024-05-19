@@ -1,23 +1,18 @@
 package com.example.complexeSportif.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Data
-@Getter
-@Setter
-@Table
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class TerrainsPadel {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private Boolean dispo;
-    // Relation
-    @ManyToOne
-    @JoinColumn(name = "complexe_sportif_id")
-    private ComplexeSportif complexeSportif;
 
 }

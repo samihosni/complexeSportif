@@ -3,19 +3,21 @@ package com.example.complexeSportif.entities;
 import com.example.complexeSportif.entities.Enum.PaymentType;
 import com.example.complexeSportif.entities.Enum.SubscriptionType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
 @Entity
 @Data
-@Getter
-@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Subscriptions {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date dateStart;
     private Date dateEnd;
