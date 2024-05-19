@@ -3,6 +3,7 @@ package com.example.complexeSportif.models;
 import com.example.complexeSportif.entities.TerrainsFoot;
 import com.example.complexeSportif.services.TerrainsFootService;
 import com.example.complexeSportif.services.TerrainsPadelService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +13,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/terrainsfoot")
+@RequiredArgsConstructor
 public class TerrainsFootREST {
-    @Autowired
-    private TerrainsFootService service;
+
+    private final TerrainsFootService service;
 
     @GetMapping("/all")
     public List<TerrainsFoot> getAllTerrains() {

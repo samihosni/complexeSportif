@@ -1,4 +1,4 @@
-package com.example.complexeSportif.entities;
+package com.example.complexeSportif.entities.Enum;
 
 public enum PaymentType {
     Monthly,

@@ -2,6 +2,7 @@ package com.example.complexeSportif.models;
 
 import com.example.complexeSportif.entities.Courses;
 import com.example.complexeSportif.services.CoursesService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +13,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/courses")
+@RequiredArgsConstructor
 public class CoursesREST {
-    @Autowired
-    private CoursesService coursesService;
+
+    private final CoursesService coursesService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Courses>> getAllCourses() {

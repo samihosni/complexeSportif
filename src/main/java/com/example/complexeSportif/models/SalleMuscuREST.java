@@ -2,6 +2,7 @@ package com.example.complexeSportif.models;
 
 import com.example.complexeSportif.entities.SalleMuscu;
 import com.example.complexeSportif.services.SalleMuscuService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +15,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("salle-muscu")
+@RequiredArgsConstructor
 public class SalleMuscuREST {
-    @Autowired
-    private SalleMuscuService salleMuscuService;
+
+    private final SalleMuscuService salleMuscuService;
 
     @GetMapping("/all")
     public ResponseEntity<List<SalleMuscu>> getAllSallesMuscu() {
