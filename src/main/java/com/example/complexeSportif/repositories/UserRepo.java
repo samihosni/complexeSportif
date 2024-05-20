@@ -1,6 +1,6 @@
 package com.example.complexeSportif.repositories;
 
-import com.example.complexeSportif.entities.User;
+import com.example.complexeSportif.entities.auth.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

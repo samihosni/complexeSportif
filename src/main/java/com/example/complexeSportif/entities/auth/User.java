@@ -1,5 +1,6 @@
-package com.example.complexeSportif.entities;
+package com.example.complexeSportif.entities.auth;
 
+import com.example.complexeSportif.entities.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
