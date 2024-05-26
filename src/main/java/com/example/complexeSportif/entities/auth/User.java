@@ -1,6 +1,5 @@
 package com.example.complexeSportif.entities.auth;
 
-import com.example.complexeSportif.entities.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,7 +31,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority((role.name())));
+        return role.getAuthorities();
     }
 
     @Override
@@ -64,4 +63,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public String fullName(){ return firstname + " " + lastname;}
 }
