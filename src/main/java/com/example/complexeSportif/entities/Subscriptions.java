@@ -2,10 +2,7 @@ package com.example.complexeSportif.entities;
 
 import com.example.complexeSportif.entities.Enum.PaymentType;
 import com.example.complexeSportif.entities.Enum.SubscriptionType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
@@ -24,4 +21,13 @@ public class Subscriptions {
     private double costs;
     private SubscriptionType subscriptionType;
     private PaymentType paymentType;
+
+    @OneToOne
+    @JoinColumn(name = "pool_id")
+    private Pool pool;
+
+    @OneToOne
+    @JoinColumn(name = "salleMusc_id")
+    private SalleMuscu salleMuscu;
+
 }

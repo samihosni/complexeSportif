@@ -1,9 +1,6 @@
 package com.example.complexeSportif.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -16,5 +13,8 @@ public class SalleMuscu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer maxCapacity;
+
+    @OneToOne(mappedBy = "salleMuscu", cascade = CascadeType.ALL)
+    private Subscriptions subscriptions;
 
 }
