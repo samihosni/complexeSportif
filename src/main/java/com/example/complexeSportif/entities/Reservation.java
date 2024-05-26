@@ -1,9 +1,6 @@
 package com.example.complexeSportif.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
@@ -19,5 +16,14 @@ public class Reservation {
     private Long id;
     private String description;
     private Date dateRes;
+
+    @ManyToOne
+    @JoinColumn(name = "terrainFoot_id")
+    private TerrainsFoot terrainsFoot;
+
+    @ManyToOne
+    @JoinColumn(name = "terrainPadel_id")
+    private TerrainsPadel terrainsPadel;
+
 
 }
