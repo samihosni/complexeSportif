@@ -1,9 +1,7 @@
 package com.example.complexeSportif;
 
-import com.example.complexeSportif.entities.auth.RegisterRequest;
-import com.example.complexeSportif.entities.auth.Role;
-import com.example.complexeSportif.services.auth.AuthenticationService;
-import lombok.RequiredArgsConstructor;
+import com.example.complexeSportif.auth.RegisterRequest;
+import com.example.complexeSportif.auth.AuthenticationService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
