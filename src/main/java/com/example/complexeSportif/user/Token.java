@@ -1,4 +1,4 @@
-package com.example.complexeSportif.entities.auth;
+package com.example.complexeSportif.user;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class Token {
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
     private String token;
     private LocalDateTime createdAt;
     private LocalDateTime expiresAt;
