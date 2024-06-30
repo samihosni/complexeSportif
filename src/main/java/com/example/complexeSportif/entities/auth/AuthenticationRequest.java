@@ -18,5 +18,5 @@ public class AuthenticationRequest {
     @NotEmpty(message = "Password is mandatory")
     @NotBlank(message = "Password is mandatory")
     @Size(min=5, message = "Password should be 5 characters long minimum")
-    String password;
+    private String password;
 }

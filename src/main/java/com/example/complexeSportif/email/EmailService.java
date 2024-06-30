@@ -1,4 +1,4 @@
-package com.example.complexeSportif.services.email;
+package com.example.complexeSportif.email;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -19,7 +19,6 @@ import java.util.Map;
 public class EmailService {
     private final JavaMailSender mailSender;
     private final SpringTemplateEngine templateEngine;
-// something to be added
     @Async
     public void sendEmail(
             String to,
@@ -44,7 +43,7 @@ public class EmailService {
         Map<String, Object> properties= new HashMap<>();
         properties.put("username", username);
         properties.put("confirmationUrl", confirmationUrl);
-        properties.put("activation-code", activationCode);
+        properties.put("activation_code", activationCode);
 
         Context context = new Context();
         context.setVariables(properties);
