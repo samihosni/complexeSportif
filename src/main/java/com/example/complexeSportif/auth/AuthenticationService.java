@@ -1,13 +1,14 @@
 package com.example.complexeSportif.auth;
 
-
+import com.example.complexeSportif.auth.AuthenticationService;
+import com.example.complexeSportif.email.EmailTemplateName;
 import com.example.complexeSportif.entities.auth.*;
 import com.example.complexeSportif.role.RoleRepo;
 import com.example.complexeSportif.user.TokenRepo;
 import com.example.complexeSportif.user.Token;
 import com.example.complexeSportif.user.UserRepo;
 import com.example.complexeSportif.security.JwtService;
-import com.example.complexeSportif.services.email.EmailService;
+import com.example.complexeSportif.email.EmailService;
 import com.example.complexeSportif.user.User;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
@@ -31,17 +32,16 @@ public class AuthenticationService {
     private final UserRepo userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final AuthenticationManager authenticationManager;
     private final EmailService emailService;
     private final TokenRepo tokenRepository;
-    private RoleRepo roleRepo;
+    private final RoleRepo roleRepo;
+    private final AuthenticationManager authenticationManager;
 
     @Value("${application.mailing.frontend.activation-url}")
     private String activationUrl;
 
     public void register(RegisterRequest request) throws MessagingException {
         var userRole = roleRepo.findByName("USER")
-                // todo - better exception handling
                 .orElseThrow(() -> new IllegalStateException("ROLE USER was not initiated"));
         var user = User.builder()
                 .firstname(request.getFirstname())
@@ -50,7 +50,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .accountLocked(false)
                 .enabled(false)
-                .role(List.of(userRole))
+                .roles(List.of(userRole))
                 .build();
         userRepository.save(user);
         sendValidationEmail(user);
@@ -66,18 +66,19 @@ public class AuthenticationService {
 
         var claims = new HashMap<String, Object>();
         var user = ((User) auth.getPrincipal());
-        claims.put("fullName", user.getFullName());
+        claims.put("fullName", user.fullName());
 
-        var jwtToken = jwtService.generateToken(claims, (User) auth.getPrincipal());
+        var jwtToken = jwtService.generateToken(claims, user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
     }
 
-    @Transactional
+
+
+    //@Transactional
     public void activateAccount(String token) throws MessagingException {
         Token savedToken = tokenRepository.findByToken(token)
-                // todo exception has to be defined
                 .orElseThrow(() -> new RuntimeException("Invalid token"));
         if (LocalDateTime.now().isAfter(savedToken.getExpiresAt())) {
             sendValidationEmail(savedToken.getUser());

@@ -1,30 +1,29 @@
 package com.example.complexeSportif;
 
-import com.example.complexeSportif.auth.RegisterRequest;
-import com.example.complexeSportif.auth.AuthenticationService;
+
+import com.example.complexeSportif.role.Role;
+import com.example.complexeSportif.role.RoleRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
 
-import static com.example.complexeSportif.entities.auth.Role.ADMIN;
 @SpringBootApplication
 @EnableAsync
 public class ComplexeSportifApplication {
 
 	public static void main(String[] args) {SpringApplication.run(ComplexeSportifApplication.class, args);}
+
 	@Bean
-	public CommandLineRunner commandLineRunner(AuthenticationService authenticationService)
+	public CommandLineRunner runner(RoleRepo roleRepo)
 	{
 		return args -> {
-			var admin= RegisterRequest.builder()
-					.firstname("Admin")
-					.lastname("ADMIN")
-					.email("admin@mail.com")
-					.password("ca1920")
-					.role(ADMIN)
-					.build();
+			if (roleRepo.findByName("USER").isEmpty()){
+				roleRepo.save(
+						Role.builder().name("USER").build()
+				);
+			}
 		};
 
 	}
