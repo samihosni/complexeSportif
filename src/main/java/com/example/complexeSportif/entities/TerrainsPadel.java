@@ -15,4 +15,8 @@ public class TerrainsPadel {
     private String name;
     private Boolean dispo;
 
+    @ManyToOne
+    @JoinColumn(name = "complexe_sportif_id")
+    private ComplexeSportif complexeSportif;
+
 }

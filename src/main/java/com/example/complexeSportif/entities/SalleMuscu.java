@@ -1,10 +1,9 @@
 package com.example.complexeSportif.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -16,5 +15,12 @@ public class SalleMuscu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer maxCapacity;
+
+    @ManyToOne
+    @JoinColumn(name = "complexe_sportif_id")
+    private ComplexeSportif complexeSportif;
+
+    @OneToMany(mappedBy = "salleMuscu")
+    private List<Courses> courses;
 
 }

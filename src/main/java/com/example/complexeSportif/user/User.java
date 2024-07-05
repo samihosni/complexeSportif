@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,29 +28,32 @@ public class User implements UserDetails, Principal {
     @Id
     @GeneratedValue
     private Long id;
+
     private String firstname;
     private String lastname;
+
     @Column(unique = true, nullable = false)
     private String email;
     private String password;
     private boolean enabled;
+
     @CreatedDate
-    @Column(unique = true, updatable  = false)
+    @Column(unique = true, updatable = false)
     private LocalDateTime createdDate;
+
     @LastModifiedDate
-    @Column(insertable = false )
+    @Column(insertable = false)
     private LocalDateTime lastModifiedDate;
+
     private boolean accountLocked;
+
     @ManyToMany(fetch = FetchType.EAGER)
-    private  List<Role> roles;
-
-
+    private List<Role> roles = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles
-                .stream()
-                .map(r -> new SimpleGrantedAuthority(r.getName()))
+        return roles.stream()
+                .flatMap(role -> role.getName().getGrantedAuthorities().stream())
                 .collect(Collectors.toList());
     }
 
@@ -83,8 +87,9 @@ public class User implements UserDetails, Principal {
         return enabled;
     }
 
-    public String fullName(){
-        return firstname + " " + lastname;}
+    public String fullName() {
+        return firstname + " " + lastname;
+    }
 
     @Override
     public String getName() {

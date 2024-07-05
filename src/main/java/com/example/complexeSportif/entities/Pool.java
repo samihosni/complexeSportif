@@ -1,9 +1,6 @@
 package com.example.complexeSportif.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -18,4 +15,8 @@ public class Pool {
     private String type;
     private double temp;
     private Boolean capacity;
+
+    @ManyToOne
+    @JoinColumn(name = "complexe_sportif_id")
+    private ComplexeSportif complexeSportif;
 }

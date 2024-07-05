@@ -1,11 +1,10 @@
-package com.example.complexeSportif.models;
+package com.example.complexeSportif.restController;
 
 import com.example.complexeSportif.entities.TerrainsFoot;
 import com.example.complexeSportif.services.TerrainsFootService;
-import com.example.complexeSportif.services.TerrainsPadelService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,18 +22,20 @@ public class TerrainsFootREST {
         return service.getAllTerrainsFoot();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/show/{id}")
     public ResponseEntity<TerrainsFoot> getTerrainById(@PathVariable Long id) {
         Optional<TerrainsFoot> terrain = service.getTerrainsFootById(id);
         return terrain.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('ADMIN')")
     public TerrainsFoot createTerrain(@RequestBody TerrainsFoot terrain) {
         return service.saveTerrainsFoot(terrain);
     }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<TerrainsFoot> updateTerrain(@PathVariable Long id, @RequestBody TerrainsFoot terrainDetails) {
         Optional<TerrainsFoot> optionalTerrain = service.getTerrainsFootById(id);
         if (optionalTerrain.isPresent()) {
@@ -49,6 +50,7 @@ public class TerrainsFootREST {
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteTerrain(@PathVariable Long id) {
         Optional<TerrainsFoot> optionalTerrain = service.getTerrainsFootById(id);
         if (optionalTerrain.isPresent()) {

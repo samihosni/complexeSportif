@@ -1,7 +1,6 @@
 package com.example.complexeSportif.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -11,7 +10,12 @@ import lombok.*;
 @Builder
 public class TerrainsFoot {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private Boolean dispo;
+
+    @ManyToOne
+    @JoinColumn(name = "complexe_sportif_id")
+    private ComplexeSportif complexeSportif;
 }

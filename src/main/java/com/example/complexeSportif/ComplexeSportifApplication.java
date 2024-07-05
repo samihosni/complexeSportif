@@ -15,17 +15,6 @@ public class ComplexeSportifApplication {
 
 	public static void main(String[] args) {SpringApplication.run(ComplexeSportifApplication.class, args);}
 
-	@Bean
-	public CommandLineRunner runner(RoleRepo roleRepo)
-	{
-		return args -> {
-			if (roleRepo.findByName("USER").isEmpty()){
-				roleRepo.save(
-						Role.builder().name("USER").build()
-				);
-			}
-		};
 
-	}
 
 }
