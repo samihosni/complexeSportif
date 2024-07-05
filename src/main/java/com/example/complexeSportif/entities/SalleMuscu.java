@@ -3,6 +3,8 @@ package com.example.complexeSportif.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -14,7 +16,13 @@ public class SalleMuscu {
     private Long id;
     private Integer maxCapacity;
 
-    @OneToOne(mappedBy = "salleMuscu", cascade = CascadeType.ALL)
-    private Subscriptions subscriptions;
+    @ManyToOne
+    @JoinColumn(name = "complexe_sportif_id")
+    private ComplexeSportif complexeSportif;
+
+    @OneToMany(mappedBy = "salleMuscu")
+    private List<Courses> courses;
+
+ 
 
 }

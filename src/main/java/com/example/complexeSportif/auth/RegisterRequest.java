@@ -25,4 +25,9 @@ public class RegisterRequest {
     @NotBlank(message = "Fill the password space")
     @Size(min = 5, message = "Password should be at least 5 characters !")
     private String password;
+    @NotEmpty(message = "Role is mandatory")
+    @NotBlank(message = "Role is mandatory")
+    private String role;
+
+
 }

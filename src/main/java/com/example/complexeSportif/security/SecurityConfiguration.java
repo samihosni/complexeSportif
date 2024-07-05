@@ -26,7 +26,8 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration {
 
-    private  final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final AuthenticationProvider authenticationProvider;
 
     @Bean
@@ -34,22 +35,37 @@ public class SecurityConfiguration {
         http
                 .cors(withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(req ->
-                        req.requestMatchers(
-                                        "/auth/**",
-                                        "/v2/api-docs",
-                                        "/v3/api-docs",
-                                        "/v3/api-docs/**",
-                                        "/swagger-resources",
-                                        "/swagger-resources/**",
-                                        "/configurations/ui",
-                                        "/configurations/ui/security",
-                                        "/swagger-ui/**",
-                                        "/webjars/**",
-                                        "/swagger-ui.html"
-                                ).permitAll()
-                                .anyRequest()
-                                .authenticated()
+                .authorizeHttpRequests(req -> req
+                        .requestMatchers(
+                                "/auth/**",
+                                "/v2/api-docs",
+                                "/v3/api-docs",
+                                "/v3/api-docs/**",
+                                "/swagger-resources",
+                                "/swagger-resources/**",
+                                "/configurations/ui",
+                                "/configurations/ui/security",
+                                "/swagger-ui/**",
+                                "/webjars/**",
+                                "/swagger-ui.html",
+                                "/complexe-sportif/all",
+                                "/complexe-sportif/show/**",
+                                "/pool/all",
+                                "/pool/show/**",
+                                "/salle-muscu/all",
+                                "/salle-muscu/show/**",
+                                "/terrainsfoot/all",
+                                "/terrainsfoot/show/**",
+                                "/terrainspadel/all",
+                                "/terrainspadel/show/**"
+                        ).permitAll()
+                        .requestMatchers(GET, "/api/adherant/**").hasAuthority("adherant:read")
+                        .requestMatchers(POST, "/api/adherant/**").hasAuthority("adherant:write")
+                        .requestMatchers(GET, "/api/admin/**").hasAuthority("admin:read")
+                        .requestMatchers(POST, "/api/admin/**").hasAuthority("admin:write")
+                        .requestMatchers(GET, "/api/entraineur/**").hasAuthority("entraineur:read")
+                        .requestMatchers(POST, "/api/entraineur/**").hasAuthority("entraineur:write")
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider)

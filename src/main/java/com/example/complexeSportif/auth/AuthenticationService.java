@@ -3,7 +3,9 @@ package com.example.complexeSportif.auth;
 import com.example.complexeSportif.auth.AuthenticationService;
 import com.example.complexeSportif.email.EmailTemplateName;
 import com.example.complexeSportif.entities.auth.*;
+import com.example.complexeSportif.role.Role;
 import com.example.complexeSportif.role.RoleRepo;
+import com.example.complexeSportif.role.RoleType;
 import com.example.complexeSportif.user.TokenRepo;
 import com.example.complexeSportif.user.Token;
 import com.example.complexeSportif.user.UserRepo;
@@ -40,10 +42,21 @@ public class AuthenticationService {
     @Value("${application.mailing.frontend.activation-url}")
     private String activationUrl;
 
+    @Transactional
     public void register(RegisterRequest request) throws MessagingException {
-        var userRole = roleRepo.findByName("USER")
-                .orElseThrow(() -> new IllegalStateException("ROLE USER was not initiated"));
-        var user = User.builder()
+        RoleType roleType;
+        try {
+            roleType = RoleType.valueOf(request.getRole().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid role specified: " + request.getRole());
+        }
+
+        String roleName = roleType.toString(); // Utilisation directe de RoleType
+
+        Role userRole = roleRepo.findByName(RoleType.valueOf(roleName))
+                .orElseThrow(() -> new IllegalStateException("Role not found: " + roleName));
+
+        User user = User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
                 .email(request.getEmail())
@@ -52,6 +65,7 @@ public class AuthenticationService {
                 .enabled(false)
                 .roles(List.of(userRole))
                 .build();
+
         userRepository.save(user);
         sendValidationEmail(user);
     }

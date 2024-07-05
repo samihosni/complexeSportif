@@ -18,11 +18,21 @@ public class ComplexeSportif {
     private String adress;
     private Integer phone;
 
-    @OneToMany()
+
+    @OneToMany(mappedBy = "complexeSportif", cascade = CascadeType.ALL)
+    private List<SalleMuscu> sallesMuscu;
+
+    @OneToMany(mappedBy = "complexeSportif", cascade = CascadeType.ALL)
+    private List<Pool> pool;
+
+    @OneToMany(mappedBy = "complexeSportif", cascade = CascadeType.ALL)
+    private List<TerrainsFoot> terrainsFoots;
+
+    @OneToMany(mappedBy = "complexeSportif", cascade = CascadeType.ALL)
     private List<TerrainsPadel> terrainsPadels;
 
-    @OneToMany()
-    private List<TerrainsFoot> terrainsFoots;
+
+
 
 
 }

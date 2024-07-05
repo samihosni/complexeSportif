@@ -13,4 +13,6 @@ public interface ReservationService {
     Reservation saveReservation(Reservation reservation);
 
     void deleteReservation(Long id);
+
+    Reservation createReservation(Long userId, Long terrainId, String typeTerrain, Reservation reservation);
 }

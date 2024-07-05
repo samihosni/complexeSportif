@@ -18,11 +18,10 @@ public class TerrainsPadel {
     private Boolean dispo;
 
     @ManyToOne
-    @JoinColumn(name = "complexe_id")
+    @JoinColumn(name = "complexe_sportif_id")
     private ComplexeSportif complexeSportif;
 
-    @OneToMany
-    private List<Reservation> reservationsPadel;
+    
 
 
 

@@ -18,8 +18,11 @@ public class Role {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Enumerated(EnumType.STRING)
     @Column(unique = true)
-    private String name;
+    private RoleType name;
+
     @ManyToMany(mappedBy = "roles")
     @JsonIgnore
     private List<User> users;
