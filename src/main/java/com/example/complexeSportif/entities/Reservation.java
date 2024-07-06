@@ -1,6 +1,7 @@
 package com.example.complexeSportif.entities;
 
 
+import com.example.complexeSportif.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 

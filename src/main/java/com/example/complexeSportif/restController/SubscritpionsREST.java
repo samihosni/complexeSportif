@@ -63,13 +63,12 @@ public class SubscritpionsREST {
     // create a subscription
 
     @PostMapping("/create")
-    @PreAuthorize("hasRole('ADHERANT')")
+
     public ResponseEntity<Subscriptions> createSubscription(
             @RequestParam Long userId,
             @RequestParam(required = false) Long salleMuscuId,
             @RequestParam(required = false) Long poolId,
-            @RequestParam SubscriptionType subscriptionType,
-            @RequestBody Subscriptions subscription) {
+            @RequestParam SubscriptionType subscriptionType) {
         Subscriptions createdSubscription = subscriptionService.createSubscription(userId, salleMuscuId, poolId, subscriptionType);
         return ResponseEntity.ok(createdSubscription);
     }
