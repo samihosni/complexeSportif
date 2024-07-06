@@ -1,5 +1,6 @@
 package com.example.complexeSportif.entities;
 
+
 import com.example.complexeSportif.user.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,5 +30,6 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "terrain_padel_id")
     private TerrainsPadel terrainPadel;
+
 
 }

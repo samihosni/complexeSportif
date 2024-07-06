@@ -3,6 +3,8 @@ package com.example.complexeSportif.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -18,4 +20,5 @@ public class TerrainsFoot {
     @ManyToOne
     @JoinColumn(name = "complexe_sportif_id")
     private ComplexeSportif complexeSportif;
+    
 }

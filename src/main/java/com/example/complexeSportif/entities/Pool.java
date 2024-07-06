@@ -19,4 +19,9 @@ public class Pool {
     @ManyToOne
     @JoinColumn(name = "complexe_sportif_id")
     private ComplexeSportif complexeSportif;
+
+    @OneToOne(mappedBy = "pool", cascade = CascadeType.ALL)
+    private Subscriptions subscriptions;
+
+
 }
