@@ -4,7 +4,7 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://localhost:3306/complexeSportifProject?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/complexeSportif?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
     username: root
     password:
   mvc:
