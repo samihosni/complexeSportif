@@ -38,6 +38,7 @@ public class AuthenticationService {
     private final TokenRepo tokenRepository;
     private final RoleRepo roleRepo;
     private final AuthenticationManager authenticationManager;
+    private final UserRepo userRepo;
 
     @Value("${application.mailing.frontend.activation-url}")
     private String activationUrl;
@@ -51,11 +52,15 @@ public class AuthenticationService {
             throw new IllegalArgumentException("Invalid role specified: " + request.getRole());
         }
 
-        String roleName = roleType.toString(); // Utilisation directe de RoleType
+        String roleName = roleType.toString();
+        System.out.println("Role found: " + roleName);
 
+
+        // Charger le rôle depuis la base de données
         Role userRole = roleRepo.findByName(RoleType.valueOf(roleName))
                 .orElseThrow(() -> new IllegalStateException("Role not found: " + roleName));
 
+        // Créer un nouvel utilisateur avec le rôle chargé
         User user = User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
@@ -63,10 +68,19 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .accountLocked(false)
                 .enabled(false)
-                .roles(List.of(userRole))
+                .roles(List.of(userRole))  // Ajouter le rôle ici
                 .build();
 
+        // Vérifier le rôle avant la sauvegarde
+        System.out.println("Role assigned to user: " + user.getRoles());
+
+        // Sauvegarder l'utilisateur en base de données
         userRepository.save(user);
+
+        // Vérifier le rôle après la sauvegarde
+        System.out.println("Role assigned to saved user: " + userRepository.findById(user.getId()).orElseThrow().getRoles());
+
+        // Envoyer l'email de validation
         sendValidationEmail(user);
     }
 
