@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-@CrossOrigin
+
 @RestController
 @RequestMapping("/terrainspadel")
 @RequiredArgsConstructor
@@ -29,7 +29,7 @@ public class TerrainsPadelREST {
     }
 
     @PostMapping("/add")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public TerrainsPadel createTerrain(@RequestBody TerrainsPadel terrain) {
         return service.saveTerrainsPadel(terrain);
     }
