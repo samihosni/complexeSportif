@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/chat")
 @RestController
 public class ChatController {
-    // send message
     @PostMapping("/sendMessage")
     public ResponseEntity<ChatMessage> sendMessage(
             @RequestBody ChatMessage chatMessage
@@ -22,7 +21,6 @@ public class ChatController {
         // Handle sending message logic (you can convert and send to WebSocket clients as needed)
         return ResponseEntity.ok(chatMessage);
     }
-// add a user
     @PostMapping("/addUser")
     public ResponseEntity<ChatMessage> addUser(
             @RequestBody ChatMessage chatMessage
