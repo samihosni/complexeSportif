@@ -1,31 +1,35 @@
 package com.example.complexeSportif.chat;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+@RequestMapping("/chat")
 @RestController
 public class ChatController {
 
-    @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
-    public ChatMessage sendMessage(
-            @Payload ChatMessage chatMessage
+
+    @PostMapping("/sendMessage")
+    public ResponseEntity<ChatMessage> sendMessage(
+            @RequestBody ChatMessage chatMessage
     ) {
-        return chatMessage;
+
+        // Handle sending message logic (you can convert and send to WebSocket clients as needed)
+        return ResponseEntity.ok(chatMessage);
     }
 
-    @MessageMapping("/chat.addUser")
-    @SendTo("/topic/public")
-    public ChatMessage addUser(
-            @Payload ChatMessage chatMessage,
-            SimpMessageHeaderAccessor headerAccessor
+    @PostMapping("/addUser")
+    public ResponseEntity<ChatMessage> addUser(
+            @RequestBody ChatMessage chatMessage
     ) {
-        // Add username in web socket session
-        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
-        return chatMessage;
+
+        // Handle adding user logic (store username in session or database)
+        return ResponseEntity.ok(chatMessage);
     }
 }
