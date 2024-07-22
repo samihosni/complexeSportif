@@ -2,6 +2,8 @@ package com.example.complexeSportif.entities;
 
 import com.example.complexeSportif.user.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,6 +15,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @Table(name = "courses")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class Courses {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

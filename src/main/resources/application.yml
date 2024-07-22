@@ -39,3 +39,9 @@ application:
       activation-url: http://localhost:4200/activate-account
 server:
   port: 8082
+
+  openai:
+   model: gpt-3.5-turbo
+   api:
+      key: sk-proj-gUa0YityBAHRQk4xP8yzT3BlbkFJ3FqaTqzj71kxiw9x0QpD
+      url: https://api.openai.com/v1/chat/completions
